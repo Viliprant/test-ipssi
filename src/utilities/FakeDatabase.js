@@ -21,6 +21,31 @@ class FakeDatabase {
 
         return account
     }
+
+    static getAccount(accountID) {
+
+        const selectedAccount = this.accounts.find(account => account.ID === accountID);
+
+        if (!JSON.stringify(selectedAccount)) {
+            return undefined
+        }
+
+        return selectedAccount
+    }
+
+    // TODO : Ajouter la sécurité sur les propriétés modifiables
+    static setAccount(account = {}) {
+        const { ID, ...accountProperties } = account;
+        let changedAccount = undefined;
+        this.accounts = this.accounts.map(account => {
+            if (account.ID === ID) {
+                changedAccount = { ...account, ...accountProperties };
+                return changedAccount;
+            }
+            return account;
+        });
+        return changedAccount;
+    }
 }
 
 module.exports = FakeDatabase

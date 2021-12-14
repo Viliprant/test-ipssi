@@ -72,3 +72,77 @@ test("Check add account in database (without being admin)", () => {
 
     expect(FakeDatabase.accounts).toEqual([{ ...expectedNewAccount, ID }]);
 })
+
+test("Check get account", () => {
+    FakeDatabase.init();
+    const accountExpected = {
+        ID: "234FA",
+        prenom: "Bastien",
+        nom: "EDERHY",
+        mdp: "hehe",
+        isAdmin: true
+    };
+
+    const account  =  FakeDatabase.getAccount("234FA");
+
+    expect(account).toEqual(accountExpected);
+})
+
+test("Check get bad account", () => {
+    FakeDatabase.init();
+    const account  =  FakeDatabase.getAccount("234F");
+    expect(account).toBeUndefined();
+})
+
+test("Check set account", () => {
+    FakeDatabase.init();
+    const accountExpected = {
+        ID: "234FA",
+        prenom: "Sayf",
+        nom: "EDERHY",
+        mdp: "hehe",
+        isAdmin: true
+    };
+
+    const account  =  FakeDatabase.setAccount(accountExpected);
+
+    expect(account).toEqual(accountExpected);
+})
+
+test("Check set bad account", () => {
+    FakeDatabase.init();
+    const accountExpected = {
+        ID: "234FA45",
+        prenom: "Sayf",
+        nom: "EDERHY",
+        mdp: "hehe",
+        isAdmin: true
+    };
+
+    const account  =  FakeDatabase.setAccount(accountExpected);
+
+    expect(account).toBeUndefined();
+})
+
+test("Check set only ID account", () => {
+    FakeDatabase.init();
+    const accountExpected = {
+        ID: "234FA",
+        prenom: "Bastien",
+        nom: "EDERHY",
+        mdp: "hehe",
+        isAdmin: true
+    };
+
+    const account  =  FakeDatabase.setAccount({ID: "234FA"});
+
+    expect(account).toEqual(accountExpected);
+})
+
+test("Check set without ID account", () => {
+    FakeDatabase.init();
+
+    const account  =  FakeDatabase.setAccount();
+
+    expect(account).toBeUndefined();
+})

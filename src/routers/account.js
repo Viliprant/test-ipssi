@@ -5,27 +5,50 @@ const FakeDatabase = require("../utilities/FakeDatabase")
 
 // GET Accounts
 router.get('/all', [checkAuthority], (req, res) => {
-    res.send(FakeDatabase.accounts)
+    const accounts = FakeDatabase.accounts
+    res.json(accounts)
+})
+
+// GET Account
+router.get('/:accountID', (req, res) => {
+    const userID = req.params.accountID
+    const account = FakeDatabase.getAccount(userID)
+    if (!account) {
+        return res.status(400).json({ message: "Unknow account" })
+    }
+    const { mdp, ...safeAccount } = account
+    res.json(safeAccount)
 })
 
 // CREATE Account
 router.post('/', (req, res) => {
     const newAccount = req.body
-    console.log(newAccount);
-    if (checkUser(newAccount)) {
-        const { mdp, ...insertedUser } = FakeDatabase.addAccount(newAccount)
-        res.send({
-            user: insertedUser
+    if (checkAccount(newAccount)) {
+        const { mdp, ...insertedAccount } = FakeDatabase.addAccount(newAccount)
+        res.json({
+            account: insertedAccount
         })
     }
     else {
-        res.status(400).send({
+        res.status(400).json({
             message: "Parameters missing !"
         })
     }
 })
 
-function checkUser(account) {
+// PUT Account
+router.put('/', (req, res) => {
+    const account = req.body
+    const changedAccount = FakeDatabase.setAccount(account);
+    if (!changedAccount) {
+        res.status(400).json({ message: "Unknow modify" })
+    }
+    const { mdp, ...safeChangedAccount } = changedAccount
+
+    res.status(200).json(safeChangedAccount)
+})
+
+function checkAccount(account) {
     return account.prenom != undefined && account.nom != undefined && account.mdp != undefined
 }
 
