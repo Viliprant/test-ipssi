@@ -1,10 +1,9 @@
 const initializedAccounts = require("../data/account")
 
 class FakeDatabase {
-    constructor() {
-        this.accounts = {}
-    }
-    init() {
+    static accounts = {}
+
+    static init() {
         this.accounts = initializedAccounts;
     }
 }

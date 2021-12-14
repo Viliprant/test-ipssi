@@ -2,12 +2,14 @@ const account = {
     "1234FA": {
         prenom: "Sarah",
         nom: "PINTO",
-        mdp: "bégé"
+        mdp: "bégé",
+        isAdmin: true
     },
     "234FA": {
         prenom: "Louison",
         nom: "DONNE",
-        mdp: "hehe"
+        mdp: "hehe",
+        isAdmin: true
     },
     "232A": {
         prenom: "Sébastien",
@@ -17,7 +19,8 @@ const account = {
     "23333FA": {
         prenom: "Brandon",
         nom: "SORET",
-        mdp: "hihi"
+        mdp: "hihi",
+        isAdmin: true
     },
 }
 

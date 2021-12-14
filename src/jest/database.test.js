@@ -1,19 +1,20 @@
 const FakeDatabase = require("../utilities/FakeDatabase")
 
 test('Check initialisation DB', () => {
-    const database = new FakeDatabase();
-    database.init();
+    FakeDatabase.init()
 
     const expectedAccount = {
         "1234FA": {
             prenom: "Sarah",
             nom: "PINTO",
-            mdp: "bégé"
+            mdp: "bégé",
+            isAdmin: true
         },
         "234FA": {
             prenom: "Louison",
             nom: "DONNE",
-            mdp: "hehe"
+            mdp: "hehe",
+            isAdmin: true
         },
         "232A": {
             prenom: "Sébastien",
@@ -23,9 +24,10 @@ test('Check initialisation DB', () => {
         "23333FA": {
             prenom: "Brandon",
             nom: "SORET",
-            mdp: "hihi"
+            mdp: "hihi",
+            isAdmin: true
         },
     }
 
-    expect(database.accounts).toEqual(expectedAccount);
+    expect(FakeDatabase.accounts).toEqual(expectedAccount);
 });
