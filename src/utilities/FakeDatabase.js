@@ -8,7 +8,18 @@ class FakeDatabase {
     }
 
     static addAccount(newAccount) {
-        this.accounts.push(newAccount);
+        const newID = (Math.random() + 1).toString(36).substring(7);
+
+        const account = {
+            ID: newID,
+            prenom: newAccount.prenom,
+            nom: newAccount.nom,
+            mdp: newAccount.mdp,
+            isAdmin: newAccount.isAdmin || false
+        }
+        this.accounts.push(account);
+
+        return account
     }
 }
 

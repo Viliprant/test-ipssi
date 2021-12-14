@@ -49,7 +49,26 @@ test("Check add account in database", () => {
         isAdmin: true
     }
 
-    FakeDatabase.addAccount(newAccount)
+    const { ID } = FakeDatabase.addAccount(newAccount)
 
-    expect(FakeDatabase.accounts).toEqual([newAccount]);
+    expect(FakeDatabase.accounts).toEqual([{ ...newAccount, ID }]);
+})
+
+test("Check add account in database (without being admin)", () => {
+    const newAccount = {
+        prenom: "Brandon",
+        nom: "SORET",
+        mdp: "hihi"
+    }
+
+    const expectedNewAccount = {
+        prenom: "Brandon",
+        nom: "SORET",
+        mdp: "hihi",
+        isAdmin: false
+    }
+
+    const { ID } = FakeDatabase.addAccount(newAccount)
+
+    expect(FakeDatabase.accounts).toEqual([{ ...expectedNewAccount, ID }]);
 })

@@ -5,8 +5,15 @@ const port = 3000
 
 const FakeDatabase = require("./utilities/FakeDatabase")
 const AccountRoute = require("./routers/account");
+const bodyParser = require('body-parser');
 
 FakeDatabase.init();
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

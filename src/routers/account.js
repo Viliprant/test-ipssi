@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { checkAuthority } = require("../utilities/security")
+const FakeDatabase = require("../utilities/FakeDatabase")
 
 // GET Accounts
 router.get('/all', [checkAuthority], (req, res) => {
@@ -9,10 +10,22 @@ router.get('/all', [checkAuthority], (req, res) => {
 
 // CREATE Account
 router.post('/', (req, res) => {
-    // CHECK BODY 
-    // CHECK FORMAT USER
-    // RETURN 400 BAD REQUEST
-    // RETURN CREATED USER
+    const newAccount = req.body
+    if (checkUser(newAccount)) {
+        const { mdp, ...insertedUser } = FakeDatabase.addAccount(newAccount)
+        res.send({
+            user: insertedUser
+        })
+    }
+    else {
+        res.status(400).send({
+            message: "Parameters missing !"
+        })
+    }
 })
+
+function checkUser(account) {
+    return account.prenom != undefined && account.nom != undefined && account.mdp != undefined
+}
 
 module.exports = router;
