@@ -11,6 +11,7 @@ router.get('/all', [checkAuthority], (req, res) => {
 // CREATE Account
 router.post('/', (req, res) => {
     const newAccount = req.body
+    console.log(newAccount);
     if (checkUser(newAccount)) {
         const { mdp, ...insertedUser } = FakeDatabase.addAccount(newAccount)
         res.send({
