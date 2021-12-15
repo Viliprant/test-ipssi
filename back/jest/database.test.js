@@ -1,4 +1,4 @@
-const FakeDatabase = require("../utilities/FakeDatabase")
+import FakeDatabase from "../utilities/FakeDatabase";
 
 beforeEach(() => {
     FakeDatabase.accounts = [];
@@ -83,14 +83,14 @@ test("Check get account", () => {
         isAdmin: true
     };
 
-    const account  =  FakeDatabase.getAccount("234FA");
+    const account = FakeDatabase.getAccount("234FA");
 
     expect(account).toEqual(accountExpected);
 })
 
 test("Check get bad account", () => {
     FakeDatabase.init();
-    const account  =  FakeDatabase.getAccount("234F");
+    const account = FakeDatabase.getAccount("234F");
     expect(account).toBeUndefined();
 })
 
@@ -104,7 +104,7 @@ test("Check set account", () => {
         isAdmin: true
     };
 
-    const account  =  FakeDatabase.setAccount(accountExpected);
+    const account = FakeDatabase.setAccount(accountExpected);
 
     expect(account).toEqual(accountExpected);
 })
@@ -119,7 +119,7 @@ test("Check set bad account", () => {
         isAdmin: true
     };
 
-    const account  =  FakeDatabase.setAccount(accountExpected);
+    const account = FakeDatabase.setAccount(accountExpected);
 
     expect(account).toBeUndefined();
 })
@@ -134,7 +134,7 @@ test("Check set only ID account", () => {
         isAdmin: true
     };
 
-    const account  =  FakeDatabase.setAccount({ID: "234FA"});
+    const account = FakeDatabase.setAccount({ ID: "234FA" });
 
     expect(account).toEqual(accountExpected);
 })
@@ -142,7 +142,7 @@ test("Check set only ID account", () => {
 test("Check set without ID account", () => {
     FakeDatabase.init();
 
-    const account  =  FakeDatabase.setAccount();
+    const account = FakeDatabase.setAccount();
 
     expect(account).toBeUndefined();
 })

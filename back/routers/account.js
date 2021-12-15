@@ -41,7 +41,7 @@ router.put('/', (req, res) => {
     const account = req.body
     const changedAccount = FakeDatabase.setAccount(account);
     if (!changedAccount) {
-        res.status(400).json({ message: "Unknow modify" })
+        return res.status(400).json({ message: "Unknow modify" })
     }
     const { mdp, ...safeChangedAccount } = changedAccount
 
