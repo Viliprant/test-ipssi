@@ -1,8 +1,12 @@
 import FakeDatabase from "../utilities/FakeDatabase";
 
+//Réinitialise la database avant CHAQUE test unitaire.
 beforeEach(() => {
     FakeDatabase.accounts = [];
 });
+
+// Vérifie la bonne initialisation de la base de donnée.
+// @return : Account[]
 
 test('Check initialisation DB', () => {
     FakeDatabase.init()
@@ -40,6 +44,8 @@ test('Check initialisation DB', () => {
     expect(FakeDatabase.accounts).toEqual(expectedAccount);
 });
 
+// Vérification de l'ajout d'un compte - Paramètres corrects
+// @return : Account
 test("Check add account in database", () => {
     const newAccount = {
         ID: "23333FA",
@@ -54,6 +60,8 @@ test("Check add account in database", () => {
     expect(FakeDatabase.accounts).toEqual([{ ...newAccount, ID }]);
 })
 
+// Vérification de l'ajout d'un compte - [isAdmin] non renseigné (false par défaut).
+// @return : Account (isAdmin : false)
 test("Check add account in database (without being admin)", () => {
     const newAccount = {
         prenom: "Brandon",
@@ -73,6 +81,8 @@ test("Check add account in database (without being admin)", () => {
     expect(FakeDatabase.accounts).toEqual([{ ...expectedNewAccount, ID }]);
 })
 
+// Vérification de la récupération d'un compte.
+// @return : Account
 test("Check get account", () => {
     FakeDatabase.init();
     const accountExpected = {
@@ -88,12 +98,16 @@ test("Check get account", () => {
     expect(account).toEqual(accountExpected);
 })
 
+// Récupération d'un compte avec un ID inconnu
+// @return : Undefined
 test("Check get bad account", () => {
     FakeDatabase.init();
     const account = FakeDatabase.getAccount("234F");
     expect(account).toBeUndefined();
 })
 
+// Vérification de la modification avec un ID inconnu.
+// @return : Undefined
 test("Check set account", () => {
     FakeDatabase.init();
     const accountExpected = {
@@ -109,6 +123,8 @@ test("Check set account", () => {
     expect(account).toEqual(accountExpected);
 })
 
+// Modification d'un compte - ID inconnu.
+// @return : Undefined
 test("Check set bad account", () => {
     FakeDatabase.init();
     const accountExpected = {
@@ -124,6 +140,8 @@ test("Check set bad account", () => {
     expect(account).toBeUndefined();
 })
 
+// Vérification de la modification d'un compte en renseignant que l'ID
+// @return : Account (non modifié)
 test("Check set only ID account", () => {
     FakeDatabase.init();
     const accountExpected = {
@@ -139,6 +157,8 @@ test("Check set only ID account", () => {
     expect(account).toEqual(accountExpected);
 })
 
+// Vérification de la modification sans renseigner de paramètres.
+// @return : Undefined
 test("Check set without ID account", () => {
     FakeDatabase.init();
 
