@@ -1,12 +1,23 @@
 const initializedAccounts = require("../data/account")
 
+/**
+* FakeDatabase
+*/
 class FakeDatabase {
     static accounts = []
 
+    /**
+     * Initialise la base de données
+     */
     static init() {
         this.accounts = initializedAccounts;
     }
 
+    /**
+    * Ajoute un compte utilisateur en base de donnée.
+    * @param {Account} newAccount - un compte utilisateur a créer en base de donnée.
+    * @returns {Account} Account ajouté
+    */
     static addAccount(newAccount) {
         const newID = (Math.random() + 1).toString(36).substring(7);
 
@@ -22,6 +33,11 @@ class FakeDatabase {
         return account
     }
 
+    /**
+    * Ajoute un compte utilisateur en base de donnée.
+    * @param {string} accountID - ID d'un compte
+    * @returns {(Account|undefined)} Account recherché
+    */
     static getAccount(accountID) {
 
         const selectedAccount = this.accounts.find(account => account.ID === accountID);
@@ -34,6 +50,11 @@ class FakeDatabase {
     }
 
     // TODO : Ajouter la sécurité sur les propriétés modifiables
+    /**
+    * Modifie un compte utilisateur en base de donnée.
+    * @param {Account} account - Account à modifier
+    * @returns {Account} Account modifié 
+    */
     static setAccount(account = {}) {
         const { ID, ...accountProperties } = account;
         let changedAccount = undefined;

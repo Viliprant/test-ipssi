@@ -1,3 +1,9 @@
+/**
+* Middleware
+* @param {Object} req - Requête
+* @param {Object} res - Réponse
+* @param {Object} next - Fonction
+*/
 function checkAuthority(req, res, next) {
     if (!req.headers) {
         const err = "Not authorized"
