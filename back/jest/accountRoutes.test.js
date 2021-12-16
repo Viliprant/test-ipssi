@@ -74,6 +74,7 @@ test('Account Route - Check get', (done) => {
 
     const expectedAccount = {
         ID: "1234FA",
+        email: "sarah.pinto@ipssi.net",
         prenom: "Sarah",
         nom: "PINTO",
         isAdmin: true
@@ -108,6 +109,7 @@ test('Account Route - Check put', (done) => {
 
     const expectedAccount = {
         ID: "1234FA",
+        email: "sarah.pinto@ipssi.net",
         prenom: "Sarah",
         nom: "PINTO",
         isAdmin: true

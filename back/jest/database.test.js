@@ -176,3 +176,36 @@ test("Check set without ID account", () => {
 
     expect(account).toBeUndefined();
 })
+
+describe("Check regex", () => {
+    test("Check with valid email", () => {
+        const email = "brandon.soret@ipssi.net"
+        const response = FakeDatabase.validateEmail(email);
+        expect(response).toBeTruthy();
+
+    });
+    test("Check without @ ", () => {
+        const email = "brandon.soretipssi.net"
+        const response = FakeDatabase.validateEmail(email);
+        expect(response).toBeFalsy();
+
+    });
+    test("Check without domain ", () => {
+        const email = "brandon.soretipssi."
+        const response = FakeDatabase.validateEmail(email);
+        expect(response).toBeFalsy();
+
+    });
+    test("Check with many @ ", () => {
+        const email = "br@ndon.soret@ipssi.net"
+        const response = FakeDatabase.validateEmail(email);
+        expect(response).toBeFalsy();
+
+    });
+    test("Check with many . ", () => {
+        const email = "brandon.soret.adore.lipssi@sarca.sme.net"
+        const response = FakeDatabase.validateEmail(email);
+        expect(response).toBeTruthy();
+
+    });
+})
