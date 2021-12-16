@@ -14,6 +14,7 @@ test('Check initialisation DB', () => {
     const expectedAccount = [
         {
             ID: "1234FA",
+            email: "sarah.pinto@ipssi.net",
             prenom: "Sarah",
             nom: "PINTO",
             mdp: "bégé",
@@ -21,6 +22,7 @@ test('Check initialisation DB', () => {
         },
         {
             ID: "234FA",
+            email: "bastien.ederhy@ipssi.net",
             prenom: "Bastien",
             nom: "EDERHY",
             mdp: "hehe",
@@ -28,17 +30,19 @@ test('Check initialisation DB', () => {
         },
         {
             ID: "232A",
+            email: "sebastien.grivel@ipssi.net",
             prenom: "Sébastien",
             nom: "GRIVEL",
             mdp: "haha"
         },
         {
             ID: "23333FA",
+            email: "brandon.soret@ipssi.net",
             prenom: "Brandon",
             nom: "SORET",
             mdp: "hihi",
             isAdmin: true
-        },
+        }
     ]
 
     expect(FakeDatabase.accounts).toEqual(expectedAccount);
@@ -48,7 +52,7 @@ test('Check initialisation DB', () => {
 // @return : Account
 test("Check add account in database", () => {
     const newAccount = {
-        ID: "23333FA",
+        email: "brandon.soret@ipssi.net",
         prenom: "Brandon",
         nom: "SORET",
         mdp: "hihi",
@@ -64,12 +68,14 @@ test("Check add account in database", () => {
 // @return : Account (isAdmin : false)
 test("Check add account in database (without being admin)", () => {
     const newAccount = {
+        email: "brandon.soret@ipssi.net",
         prenom: "Brandon",
         nom: "SORET",
         mdp: "hihi"
     }
 
     const expectedNewAccount = {
+        email: "brandon.soret@ipssi.net",
         prenom: "Brandon",
         nom: "SORET",
         mdp: "hihi",
@@ -87,6 +93,7 @@ test("Check get account", () => {
     FakeDatabase.init();
     const accountExpected = {
         ID: "234FA",
+        email: "bastien.ederhy@ipssi.net",
         prenom: "Bastien",
         nom: "EDERHY",
         mdp: "hehe",
@@ -112,6 +119,7 @@ test("Check set account", () => {
     FakeDatabase.init();
     const accountExpected = {
         ID: "234FA",
+        email: "sayf.ederhy@ipssi.net",
         prenom: "Sayf",
         nom: "EDERHY",
         mdp: "hehe",
@@ -129,6 +137,7 @@ test("Check set bad account", () => {
     FakeDatabase.init();
     const accountExpected = {
         ID: "234FA45",
+        email: "sayf.ederhy@ipssi.net",
         prenom: "Sayf",
         nom: "EDERHY",
         mdp: "hehe",
@@ -146,6 +155,7 @@ test("Check set only ID account", () => {
     FakeDatabase.init();
     const accountExpected = {
         ID: "234FA",
+        email: "bastien.ederhy@ipssi.net",
         prenom: "Bastien",
         nom: "EDERHY",
         mdp: "hehe",

@@ -14,15 +14,29 @@ class FakeDatabase {
     }
 
     /**
+     * 
+     * @param {string} email - Représente un email à vérifier
+     * @returns {Booleen} Email valide ou incorrect
+     */
+    static validateEmail(email) {
+        const regex =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return regex.test(email);
+    };
+
+    /**
     * Ajoute un compte utilisateur en base de donnée.
     * @param {Account} newAccount - un compte utilisateur a créer en base de donnée.
-    * @returns {Account} Account ajouté
+    * @returns {(Account|undefined)} Account ajouté
     */
     static addAccount(newAccount) {
+        if (!this.validateEmail(newAccount.email)) {
+            return undefined;
+        }
         const newID = (Math.random() + 1).toString(36).substring(7);
 
         const account = {
             ID: newID,
+            email: newAccount.email,
             prenom: newAccount.prenom,
             nom: newAccount.nom,
             mdp: newAccount.mdp,
@@ -41,6 +55,22 @@ class FakeDatabase {
     static getAccount(accountID) {
 
         const selectedAccount = this.accounts.find(account => account.ID === accountID);
+
+        if (!JSON.stringify(selectedAccount)) {
+            return undefined
+        }
+
+        return selectedAccount
+    }
+
+    /**
+    * Ajoute un compte utilisateur en base de donnée.
+    * @param {string} accountEmail - Email d'un compte
+    * @returns {(Account|undefined)} Account recherché
+    */
+    static getEmail(accountEmail) {
+
+        const selectedAccount = this.accounts.find(account => account.Email === accountEmail);
 
         if (!JSON.stringify(selectedAccount)) {
             return undefined
