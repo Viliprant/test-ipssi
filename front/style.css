@@ -1,0 +1,130 @@
+:root {
+    --bg-color: #b71c1c
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.form {
+    position: relative;
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    min-height: 40vmin;
+    min-width: 30vmin;
+
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    flex: 1;
+    display: grid;
+    gap: 1rem;
+}
+
+.form-control {
+    display: grid;
+}
+
+input {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 0.25rem;
+}
+
+input[type="submit"] {
+    background-color: var(--bg-color);
+    color: white;
+    font-size: 1.1rem;
+}
+
+.flake-wrapper {
+    position: absolute;
+    z-index: 999;
+}
+
+.flake {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes falling {
+    0% {
+        top: -50px;
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+.sapin-seb {
+    position: absolute;
+
+}
+
+.gingerbread {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%) rotate(45deg);
+    z-index: -1;
+}
+
+.gingerbread .body {
+    fill: #cd803d;
+}
+
+.gingerbread .eye {
+    fill: white;
+}
+
+.gingerbread .mouth {
+    fill: none;
+    stroke: white;
+    stroke-width: 2px;
+}
+
+.gingerbread .limb {
+    stroke: #cd803d;
+    stroke-width: 35px;
+    stroke-linecap: round;
+}
+
+.belt {
+    position: absolute;
+    bottom: -5%;
+    left: 5%;
+    transform: translate(-50%, 50%) rotate(45deg);
+    transform-origin: center 30px;
+    animation: dring 3s infinite ease;
+}
+
+@keyframes dring {
+    50% {
+        transform: translate(-50%, 50%) rotate(-45deg);
+    }
+}

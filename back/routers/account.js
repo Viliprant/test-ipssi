@@ -48,10 +48,12 @@ router.post('/authentification', (req, res) => {
     const { email, mdp } = req.body
     const account = FakeDatabase.authenticate(email, mdp)
     if (account) {
-        const { ID, isAdmin } = account;
+        const { ID, isAdmin, nom, prenom } = account;
         res.json({
             ID,
             email,
+            nom,
+            prenom,
             isAdmin
         })
     }

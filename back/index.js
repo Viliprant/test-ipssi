@@ -6,6 +6,9 @@ const port = 3000
 const FakeDatabase = require("./utilities/FakeDatabase")
 const AccountRoute = require("./routers/account");
 const bodyParser = require('body-parser');
+const cors = require('cors')
+
+app.use(cors())
 
 FakeDatabase.init();
 

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon back/index.js",
+    "devback": "nodemon back/index.js",
+    "devfront": "live-server front/index.html",
     "jest": "jest --verbose"
   },
   "jest": {
@@ -28,7 +29,9 @@
     "axios": "^0.24.0",
     "babel-jest": "^27.4.5",
     "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "live-server": "^1.1.0",
     "nodemon": "^2.0.15",
     "ts-jest": "^27.1.1"
   },

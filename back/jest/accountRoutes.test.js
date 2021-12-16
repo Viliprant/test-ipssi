@@ -172,6 +172,8 @@ describe("Check Account Route", () => {
             const expectedAccount = {
                 ID: "1234FA",
                 email: "sarah.pinto@ipssi.net",
+                nom: "PINTO",
+                prenom: "Sarah",
                 isAdmin: true
             }
 
@@ -216,6 +218,8 @@ describe("Check Account Route", () => {
             const expectedAccount = {
                 ID: "232A",
                 email: "sebastien.grivel@ipssi.net",
+                nom: "GRIVEL",
+                prenom: "Sébastien"
             }
 
             post(`http://localhost:3000/account/authentification/`, credentials)
