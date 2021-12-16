@@ -24,10 +24,17 @@ router.get('/:accountID', (req, res) => {
 router.post('/', (req, res) => {
     const newAccount = req.body
     if (checkAccount(newAccount)) {
-        const { mdp, ...insertedAccount } = FakeDatabase.addAccount(newAccount)
-        res.json({
-            account: insertedAccount
-        })
+        const insertedAccount = FakeDatabase.addAccount(newAccount)
+        if (insertedAccount) {
+            const { mdp, ...safeInsertedAccount } = insertedAccount
+            res.json({
+                account: safeInsertedAccount
+            })
+        } else {
+            res.status(400).json({
+                message: "Can't add this account, does it alreay exists ?"
+            })
+        }
     }
     else {
         res.status(400).json({

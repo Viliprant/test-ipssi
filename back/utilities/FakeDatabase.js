@@ -29,7 +29,7 @@ class FakeDatabase {
     * @returns {(Account|undefined)} Account ajouté
     */
     static addAccount(newAccount) {
-        if (!this.validateEmail(newAccount.email)) {
+        if (!this.validateEmail(newAccount.email) || this.getAccountByEmail(newAccount.email)) {
             return undefined;
         }
         const newID = (Math.random() + 1).toString(36).substring(7);
@@ -55,6 +55,22 @@ class FakeDatabase {
     static getAccount(accountID) {
 
         const selectedAccount = this.accounts.find(account => account.ID === accountID);
+
+        if (!JSON.stringify(selectedAccount)) {
+            return undefined
+        }
+
+        return selectedAccount
+    }
+
+    /**
+    * Ajoute un compte utilisateur en base de donnée.
+    * @param {string} accountEmail - ID d'un compte
+    * @returns {(Account|undefined)} Account recherché
+    */
+    static getAccountByEmail(accountEmail) {
+
+        const selectedAccount = this.accounts.find(account => account.email === accountEmail);
 
         if (!JSON.stringify(selectedAccount)) {
             return undefined

@@ -1,9 +1,14 @@
 import FakeDatabase from "../utilities/FakeDatabase";
+import account from "../data/account";
 
 //Réinitialise la database avant CHAQUE test unitaire.
 beforeEach(() => {
     FakeDatabase.accounts = [];
 });
+
+afterAll(() => {
+    FakeDatabase.accounts = account;
+})
 
 describe("Check FakeDatabase Functions", () => {
     // Vérifie la bonne initialisation de la base de donnée.

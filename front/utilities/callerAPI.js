@@ -6,6 +6,13 @@ async function connect(email, mdp) {
     return response;
 }
 
+async function register({ email, prenom, nom, mdp }) {
+    const newAccount = { email, prenom, nom, mdp };
+    const response = await post("http://localhost:3000/account/", newAccount);
+    return response;
+}
+
 export {
-    connect
+    connect,
+    register
 }

@@ -1,10 +1,45 @@
 import { get, post, put } from "axios";
+import FakeDatabase from "../utilities/FakeDatabase";
 
 describe("Check Account Route", () => {
     describe("Check Route Get All (/all)", () => {
         // Vérification de l'accès à la route All si [isAdmin] vaut true.
         // @return : Accès autorisé.
         test('Check valid authority', (done) => {
+            const accounts = [
+                {
+                    ID: "1234FA",
+                    email: "sarah.pinto@ipssi.net",
+                    prenom: "Sarah",
+                    nom: "PINTO",
+                    mdp: "bégé",
+                    isAdmin: true
+                },
+                {
+                    ID: "234FA",
+                    email: "bastien.ederhy@ipssi.net",
+                    prenom: "Bastien",
+                    nom: "EDERHY",
+                    mdp: "hehe",
+                    isAdmin: true
+                },
+                {
+                    ID: "232A",
+                    email: "sebastien.grivel@ipssi.net",
+                    prenom: "Sébastien",
+                    nom: "GRIVEL",
+                    mdp: "haha"
+                },
+                {
+                    ID: "23333FA",
+                    email: "brandon.soret@ipssi.net",
+                    prenom: "Brandon",
+                    nom: "SORET",
+                    mdp: "hihi",
+                    isAdmin: true
+                }
+            ]
+
             get("http://localhost:3000/account/all", {
                 headers: {
                     isAdmin: true
@@ -69,6 +104,24 @@ describe("Check Account Route", () => {
                     expect(e.response.status).toEqual(400);
                     done()
                 })
+        });
+
+        // Tentative d'ajout d'un compte déjà existant.
+        // @return : message d'erreur et code http 400 
+        test('Check add existing email', (done) => {
+            const accountExisting = {
+                email: "brandon.soret@ipssi.net",
+                prenom: "Brandon",
+                nom: "SORET",
+                mdp: "hihi",
+                isAdmin: true
+            };
+            post("http://localhost:3000/account", accountExisting)
+                .catch((e) => {
+                    expect(e.response.status).toEqual(400);
+                    done()
+                })
+
         });
     })
 
