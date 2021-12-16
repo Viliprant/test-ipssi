@@ -47,6 +47,7 @@ describe("Check Account Route", () => {
         // @return : Account ajouté et test d'un code http 200.
         test('Check add account', (done) => {
             const newAccount = {
+                "email": "sayf.bejaoui@super.formateur.net",
                 "prenom": "Sayf",
                 "nom": "BEJAOUI",
                 "mdp": "prof",
@@ -106,23 +107,22 @@ describe("Check Account Route", () => {
         });
     })
 
-    describe("Check Route Put Account (/account/:accountID)", () => {
-        // Modifcation d'un compte.
+    describe("Check Route Authentification (/authentification)", () => {
+        // Authentification
         // @return : Account attendu et code http 200.
-        test('Check put account', (done) => {
-            const selectedID = {
-                ID: "1234FA"
+        test('Check authentification', (done) => {
+            const credentials = {
+                email: "sarah.pinto@ipssi.net",
+                mdp: "bégé"
             }
 
             const expectedAccount = {
                 ID: "1234FA",
                 email: "sarah.pinto@ipssi.net",
-                prenom: "Sarah",
-                nom: "PINTO",
                 isAdmin: true
             }
 
-            put(`http://localhost:3000/account/`, selectedID)
+            post(`http://localhost:3000/account/authentification/`, credentials)
                 .then(response => {
                     expect(response.status).toEqual(200);
                     expect(response.data).toEqual(expectedAccount);
@@ -130,16 +130,45 @@ describe("Check Account Route", () => {
                 })
         });
 
-        // Modifcation d'un compte avec ID incorrect.
+        // Authentification mauvais mot de passe
         // @return : message d'erreur et code http 400.
-        test('Check put wrong ID', (done) => {
-            const selectedID = {
-                ID: "1234FAAA"
+        test('Check wrong authentification', (done) => {
+            const credentials = {
+                email: "sarah.pinto@ipssi.net",
+                mdp: "wrongPassword"
             }
 
-            put(`http://localhost:3000/account`)
+            const expectedAccount = {
+                ID: "1234FA",
+                email: "sarah.pinto@ipssi.net",
+                isAdmin: true
+            }
+
+            post(`http://localhost:3000/account/authentification/`, credentials)
                 .catch(e => {
                     expect(e.response.status).toEqual(400);
+                    done()
+                })
+        });
+
+        // Authentification mauvais mot de passe
+        // @return : message d'erreur et code http 400.
+        test('Check authentification try to be Admin', (done) => {
+            const credentials = {
+                email: "sebastien.grivel@ipssi.net",
+                mdp: "haha",
+                isAdmin: true
+            }
+
+            const expectedAccount = {
+                ID: "232A",
+                email: "sebastien.grivel@ipssi.net",
+            }
+
+            post(`http://localhost:3000/account/authentification/`, credentials)
+                .then(response => {
+                    expect(response.status).toEqual(200);
+                    expect(response.data).toEqual(expectedAccount);
                     done()
                 })
         });

@@ -14,7 +14,7 @@ router.get('/:accountID', (req, res) => {
     const userID = req.params.accountID
     const account = FakeDatabase.getAccount(userID)
     if (!account) {
-        return res.status(400).json({ message: "Unknow account" })
+        return res.status(400).json({ message: "Unknown account" })
     }
     const { mdp, ...safeAccount } = account
     res.json(safeAccount)
@@ -36,6 +36,25 @@ router.post('/', (req, res) => {
     }
 })
 
+// Authentification
+router.post('/authentification', (req, res) => {
+    const { email, mdp } = req.body
+    const account = FakeDatabase.authenticate(email, mdp)
+    if (account) {
+        const { ID, isAdmin } = account;
+        res.json({
+            ID,
+            email,
+            isAdmin
+        })
+    }
+    else {
+        res.status(400).json({
+            message: "This account doesn't exist !"
+        })
+    }
+})
+
 // PUT Account
 router.put('/', (req, res) => {
     const account = req.body
@@ -49,7 +68,10 @@ router.put('/', (req, res) => {
 })
 
 function checkAccount(account) {
-    return account.prenom != undefined && account.nom != undefined && account.mdp != undefined
+    return account.prenom != undefined &&
+        account.nom != undefined &&
+        account.mdp != undefined &&
+        account.email != undefined
 }
 
 module.exports = router;

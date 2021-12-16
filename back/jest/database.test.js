@@ -118,6 +118,42 @@ describe("Check FakeDatabase Functions", () => {
         })
     })
 
+    describe("Function Authenticate", () => {
+        // Vérification de la récupération d'un compte.
+        // @return : Account
+        test("Check existing account", () => {
+            FakeDatabase.init();
+            const accountExpected = {
+                ID: "234FA",
+                email: "bastien.ederhy@ipssi.net",
+                prenom: "Bastien",
+                nom: "EDERHY",
+                mdp: "hehe",
+                isAdmin: true
+            };
+
+            const account = FakeDatabase.authenticate("bastien.ederhy@ipssi.net", "hehe");
+
+            expect(account).toEqual(accountExpected);
+        })
+
+        // Récupération d'un compte avec un mdp invalide
+        // @return : Undefined
+        test("Check unknown account (bad password)", () => {
+            FakeDatabase.init();
+            const account = FakeDatabase.authenticate("bastien.ederhy@ipssi.net", "hoho");
+            expect(account).toBeUndefined();
+        })
+
+        // Récupération d'un compte sans mot de passe envoyé
+        // @return : Undefined
+        test("Check unknown account without password", () => {
+            FakeDatabase.init();
+            const account = FakeDatabase.authenticate("bastien.ederhy@ipssi.net");
+            expect(account).toBeUndefined();
+        })
+    })
+
     describe("Function Set", () => {
 
         // Vérification de la modification avec un ID inconnu.
