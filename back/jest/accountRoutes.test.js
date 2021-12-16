@@ -151,7 +151,7 @@ describe("Check Account Route", () => {
                 })
         });
 
-        // Authentification mauvais mot de passe
+        // Authentification tentative de devenir Admin
         // @return : message d'erreur et code http 400.
         test('Check authentification try to be Admin', (done) => {
             const credentials = {

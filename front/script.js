@@ -1,3 +1,2 @@
-import { testString } from "./utilities/callerAPI.js";
+import { connect } from "./utilities/callerAPI.js";
 
-console.log(testString());
