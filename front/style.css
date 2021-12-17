@@ -27,6 +27,8 @@ body {
     background-color: white;
     justify-content: center;
     align-items: center;
+
+    z-index: 10000;
 }
 
 form {
@@ -43,6 +45,7 @@ input {
     border: none;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
 }
 
 input[type="submit"] {
@@ -127,4 +130,19 @@ input[type="submit"] {
     50% {
         transform: translate(-50%, 50%) rotate(-45deg);
     }
+}
+
+a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--bg-color);;
+}
+
+label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.invalidInput {
+    outline: 1px solid var(--bg-color);
 }

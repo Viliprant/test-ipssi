@@ -1,17 +1,11 @@
-const loginDOM = document.querySelector("#login");
 const emailDOM = document.querySelector("#email");
 const mdpDOM = document.querySelector("#mdp");
 const formDOM = document.querySelector("#login");
 
+
 async function connect(email, mdp) {
     const credentials = { email, mdp };
     const response = await axios.post("http://localhost:3000/account/authentification", credentials);
-    return response;
-}
-
-async function register({ email, prenom, nom, mdp }) {
-    const newAccount = { email, prenom, nom, mdp };
-    const response = await axios.post("http://localhost:3000/account/", newAccount);
     return response;
 }
 
@@ -62,11 +56,11 @@ function ifNotAdmin({ prenom, nom }) {
     </div>`;
 }
 
-function ifInvalidCredentials() {
-    formDOM.innerHTML = `<div style="font-size: 1.1rem" >Kézako</div>`;
+function ifInvalidCredentials({ message }) {
+    formDOM.innerHTML = `<div style="font-size: 1.1rem" >Kézako <p>${message}</p></div>`;
 }
 
-loginDOM.addEventListener("submit", async (evt) => {
+formDOM.addEventListener("submit", async (evt) => {
     evt.preventDefault();
 
     try {
@@ -80,6 +74,6 @@ loginDOM.addEventListener("submit", async (evt) => {
         }
     } catch (error) {
         console.log(error);
-        ifInvalidCredentials()
+        ifInvalidCredentials(error.response.data)
     }
 })
