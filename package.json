@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devback": "nodemon back/index.js",
-    "devfront": "live-server front/index.html",
+    "dev": "nodemon back/index.js",
     "jest": "jest --verbose"
   },
   "jest": {
