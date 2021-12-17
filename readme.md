@@ -17,6 +17,13 @@ Executer /front/index.html à l'aide d'un serveur static
 npm run jest
 ```
 
+## Visualisation de la documentation
+```
+jsdoc .\back\utilities\FakeDatabase.js .\back\utilities\security.js
+
+Puis se rendre sur : http://127.0.0.1:5500/out/index.html et naviguer dans le menu de droite.
+```
+
 ## Rapport
 ![alt text](https://raw.githubusercontent.com/Viliprant/test-ipssi/master/readmeIMG/databaseTest.png)
 
