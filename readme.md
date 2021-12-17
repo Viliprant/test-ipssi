@@ -4,10 +4,14 @@
 ```
 npm install
 ```
-## Execution du projet
+## Execution de l'API
 ```
 npm run dev
 ```
+## Execution du Front
+Executer /front/index.html à l'aide d'un serveur static 
+[Live-Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
 ## Execution des tests unitaires
 ```
 npm run jest
