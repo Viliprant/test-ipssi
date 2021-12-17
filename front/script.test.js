@@ -12,7 +12,7 @@ describe("Check Front Functions", () => {
                 expect(response.status).toBe(200);
             }
             catch (e) {
-                console.log(e);
+
             }
         });
 
@@ -44,7 +44,7 @@ describe("Check Front Functions", () => {
                 expect(response.status).toBe(200);
             }
             catch (e) {
-                console.log(e);
+
             }
         });
 

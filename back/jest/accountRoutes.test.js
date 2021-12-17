@@ -1,5 +1,10 @@
 import { get, post, put } from "axios";
-import FakeDatabase from "../utilities/FakeDatabase";
+import axios from "axios";
+
+beforeEach(async () => {
+    await axios.delete("http://localhost:3000/account")
+    await axios.post("http://localhost:3000/account/init")
+})
 
 describe("Check Account Route", () => {
     describe("Check Route Get All (/all)", () => {
@@ -82,11 +87,11 @@ describe("Check Account Route", () => {
         // @return : Account ajouté et test d'un code http 200.
         test('Check add account', (done) => {
             const newAccount = {
-                "email": "sayf.bejaoui@super.formateur.net",
-                "prenom": "Sayf",
-                "nom": "BEJAOUI",
-                "mdp": "prof",
-                "isAdmin": true
+                email: "bastien2.ederhy@ipssi.net",
+                prenom: "Bastien",
+                nom: "EDERHY",
+                mdp: "hehe",
+                isAdmin: true
             }
 
             const response = post("http://localhost:3000/account", newAccount)

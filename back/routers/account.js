@@ -76,6 +76,26 @@ router.put('/', (req, res) => {
     res.status(200).json(safeChangedAccount)
 })
 
+// DELETE All Account
+router.delete('/', (req, res) => {
+    FakeDatabase.clearAllAccount();
+
+    res.status(200).json({
+        message: "Database cleared !"
+    })
+})
+
+
+// INIT ACCOUNT
+router.post('/init', (req, res) => {
+    FakeDatabase.init();
+
+    res.status(200).json({
+        accounts: FakeDatabase.accounts
+    })
+})
+
+
 function checkAccount(account) {
     return account.prenom != undefined &&
         account.nom != undefined &&

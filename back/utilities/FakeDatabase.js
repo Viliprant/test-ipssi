@@ -98,7 +98,6 @@ class FakeDatabase {
         return selectedAccount
     }
 
-    // TODO : Ajouter la sécurité sur les propriétés modifiables
     /**
     * Modifie un compte utilisateur en base de donnée.
     * @param {Account} account - Account à modifier
@@ -115,6 +114,13 @@ class FakeDatabase {
             return account;
         });
         return changedAccount;
+    }
+
+    /**
+    * Supprime tous les comptes de la BDD
+    */
+    static clearAllAccount() {
+        this.accounts = []
     }
 }
 

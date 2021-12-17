@@ -13,7 +13,7 @@ window.addEventListener('load', function () {
     interval = setInterval(function () {
         create_snow_lake();
         remove_snow_lake();
-    }, 500);
+    }, 200);
 });
 
 function create_snow_lake() {
